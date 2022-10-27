@@ -1,11 +1,23 @@
 import React from "react";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
+
+import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { UserContext } from "../../Context/user.context-component";
 import { GrReactjs } from "react-icons/gr";
+import LoginAvatar from "../../assets/image.png";
+
 import "./header-component-style.css";
 
 const Header = () => {
+	const { currentUser, setCurrentUser } = useContext(UserContext);
+
+	const signOutHandler = async () => {
+		await signOutUser();
+		setCurrentUser(null);
+	};
+
 	return (
 		<Fragment>
 			<div className="container-fluid bg-warning bg-gradient p-2 ">
@@ -158,44 +170,81 @@ const Header = () => {
 						</li>
 					</ul>
 					<div className="ms-2">
-						<Link
-							className="btn btn-outline-dark bg-gradient me-2"
-							style={{
-								textDecoration: "none",
-								color: "black",
-								fontWeight: "bold",
-								fontSize: 16,
-							}}
-							to="/login"
-						>
-							Login
-						</Link>
+						{currentUser ? (
+							<span className="btn dropdown me-2">
+								<a
+									href="#"
+									className="link-dark text-decoration-none dropdown-toggle"
+									data-bs-toggle="dropdown"
+									aria-expanded="false"
+								>
+									<img
+										src={currentUser.photoURL}
+										// src={LoginAvatar}
+										alt="mdo"
+										width="32"
+										height="32"
+										className="rounded-circle "
+									/>
+								</a>
+								<ul className="dropdown-menu">
+									<Link
+										className="dropdown-item"
+										type="button"
+										style={{
+											color: "red",
+											fontSize: 16,
+											textTransform: "capitalize",
+										}}
+										onClick={signOutHandler}
+										to="/"
+									>
+										Sign Out
+									</Link>
+								</ul>
+							</span>
+						) : (
+							<Link
+								className="btn btn-outline-dark bg-gradient me-2"
+								style={{
+									textDecoration: "none",
+									color: "black",
+									fontWeight: "bold",
+									fontSize: 16,
+								}}
+								to="/login"
+							>
+								Login
+							</Link>
+						)}
 
-						{/* <Link
-							className="btn btn-outline-dark bg-gradient me-2"
-							style={{
-								textDecoration: "none",
-								color: "black",
-								fontWeight: "bold",
-								fontSize: 16,
-							}}
-							to="/sign-up"
-						>
-							Sign-up
-						</Link> */}
-						{/* 
-						<Link
-							className="btn btn-outline-dark bg-gradient me-2"
-							style={{
-								textDecoration: "none",
-								color: "black",
-								fontWeight: "bold",
-								fontSize: 16,
-							}}
-							to="/dashboard"
-						>
-							Dashboard
-						</Link> */}
+						{currentUser ? (
+							<Link
+								className="btn btn-outline-warning bg-gradient me-5"
+								style={{
+									textDecoration: "none",
+									color: "black",
+									fontWeight: "bold",
+									fontSize: 16,
+								}}
+								to="/dashboard"
+							>
+								Dashboard
+							</Link>
+						) : (
+							<Link
+								className="btn btn-outline-dark bg-gradient me-5"
+								style={{
+									textDecoration: "none",
+									color: "black",
+									fontWeight: "bold",
+									fontSize: 16,
+								}}
+								to="/sign-up"
+							>
+								Sign-up
+							</Link>
+						)}
 					</div>
 				</div>
 			</div>

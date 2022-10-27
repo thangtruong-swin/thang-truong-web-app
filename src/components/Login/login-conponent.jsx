@@ -1,24 +1,49 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import { useEffect } from "react";
+import { getRedirectResult } from "firebase/auth";
 import Header from "../Header/header-components";
+import { UserContext } from "../../Context/user.context-component";
+
 import LoginAvatar from "../../assets/image.png";
 import {
+	auth,
 	signInWithGooglePopup,
 	createUserDocumentFromAuth,
+	signInWithGoogleRedirect,
 } from "../../utils/firebase/firebase.utils";
 import "./login-component-styles.css";
-import userEvent from "@testing-library/user-event";
 
 const Login = () => {
+	// useEffect(() => {
+	// 	// Should be wrap by a functoin
+	// 	const loadUser = async () => {
+	// 		const repsonse = await getRedirectResult(auth);
+	// 		if (repsonse) {
+	// 			const userDocRef = await createUserDocumentFromAuth(repsonse.user);
+	// 			console.log(userDocRef);
+	// 		}
+	// 	};
+
+	// 	// then call it here
+	// 	loadUser();
+	// }, []);
+
+	const { setCurrentUser } = useContext(UserContext);
+
 	const logGoogleUser = async () => {
 		const { user } = await signInWithGooglePopup();
-		// userEvent.displayName;
-		// const response = await signInWithGooglePopup();
-		console.log(user);
-		console.log(user.displayName);
-		const userDocRef = await createUserDocumentFromAuth(user);
-		console.log(userDocRef);
-	};
+		// console.log(user);
 
+		const userDocRef = await createUserDocumentFromAuth(user);
+		// console.log(userDocRef);
+		setCurrentUser(user);
+		// console.log(user.displayName);
+		// console.log(user.photoURL);
+	};
+	// const logGoogleRedirectUser = async () => {
+	// 	const { user } = await signInWithGoogleRedirect();
+	// 	console.log(user);
+	// };
 	return (
 		<Fragment>
 			<Header />
@@ -34,7 +59,7 @@ const Login = () => {
 						id="floatingInputEmail"
 						placeholder="Email address"
 					/>
-					<label htmlFor="floatingInputEmail">Email address</label>
+					<label htmlFor="floatingInputEmail">Please enter email address</label>
 				</div>
 				<div className="form-floating mt-3">
 					<input
@@ -43,17 +68,17 @@ const Login = () => {
 						id="floatingInputPassword"
 						placeholder="Enter Password"
 					/>
-					<label htmlFor="floatingInputPassword">Enter Password</label>
+					<label htmlFor="floatingInputPassword">Please enter Password</label>
 				</div>
 
 				<div className="checkbox mb-3 mt-3">
-					<label>
+					{/* <label>
 						<input type="checkbox" value="remember-me" /> Remember me
-					</label>
+					</label> */}
 					<label>
 						<input
 							type="reset"
-							className="btn btn-outline-dark btn-sm ms-3"
+							className="btn btn-outline-dark btn-sm"
 							value="Reset "
 						/>
 					</label>
@@ -75,6 +100,19 @@ const Login = () => {
 						/>
 						Sign in with Google Popup
 					</button>
+					{/* <button
+						className="w-50 btn btn-outline-primary ms-3"
+						type="submit"
+						onClick={logGoogleRedirectUser}
+					>
+						<img
+							width="20px"
+							alt="Google sign-in"
+							src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
+							className="me-2"
+						/>
+						Sign in with Google Redirect
+					</button> */}
 				</div>
 			</div>
 		</Fragment>

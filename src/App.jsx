@@ -1,6 +1,7 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "./Context/user.context-component";
 import Header from "./components/Header/header-components";
 import NewArrivalComponent from "./components/New-Arrival/new-arrival-component";
 import Sale from "./components/Sale/sale-component";
@@ -13,6 +14,8 @@ import Dashboard from "./components/Dashboard/dashboard-component";
 import "./App.css";
 
 function App() {
+	const { currentUser } = useContext(UserContext);
+	// alert(currentUser);
 	return (
 		<Routes>
 			<Route path="/" element={<Header />}></Route>
