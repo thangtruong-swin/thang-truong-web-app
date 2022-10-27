@@ -56,104 +56,87 @@ const SignUp = () => {
 	return (
 		<Fragment>
 			<Header />
-			<form onSubmit={handleSubmit} className="container mt-5 w-50">
-				<div className="row mb-4">
-					<div className="col">
-						<div className="form-outline">
+			<form onSubmit={handleSubmit}>
+				<div className="container-sm mt-2">
+					<fieldset className="border ">
+						<legend className="float-none w-auto p-2 text-center text-danger fs-2">
+							Please Sign-up
+						</legend>
+						<div className="form-floating mt-3 col-lg-4 mx-auto">
 							<input
 								type="text"
-								id="form3Example1"
+								id="formFloatingDisplayName"
+								placeholder="Please Enter Display Name"
 								className="form-control"
 								required
 								onChange={handleChange}
 								name="displayName"
 								value={displayName}
 							/>
-							<label className="form-label" htmlFor="form3Example1">
-								Display name
+							<label htmlFor="formFloatingDisplayName">Display name</label>
+						</div>
+
+						<div className="form-floating mt-3 col-lg-4 mx-auto">
+							<input
+								type="email"
+								id="formFloatingEmail"
+								placeholder="Please Enter Email Address"
+								className="form-control"
+								required
+								onChange={handleChange}
+								name="email"
+								value={email}
+							/>
+							<label htmlFor="formFloatingEmail">Email address</label>
+						</div>
+
+						<div className="form-floating mt-3 col-lg-4 mx-auto">
+							<input
+								type="password"
+								id="formFloatingPassword"
+								placeholder="Please Enter Password"
+								className="form-control"
+								required
+								onChange={handleChange}
+								name="password"
+								value={password}
+							/>
+							<label htmlFor="formFloatingPassword">Password</label>
+						</div>
+						<div className="form-floating mt-3 col-lg-4 mx-auto">
+							<input
+								type="password"
+								id="formFloatingConfirmpassword"
+								placeholder="Please Enter Confirm Password"
+								className="form-control"
+								required
+								onChange={handleChange}
+								name="confirmPassword"
+								value={confirmPassword}
+							/>
+							<label htmlFor="formFloatingConfirmpassword">
+								Confirm Password
 							</label>
 						</div>
-					</div>
-				</div>
 
-				<div className="form-outline mb-4">
-					<input
-						type="email"
-						id="form3Example3"
-						className="form-control"
-						required
-						onChange={handleChange}
-						name="email"
-						value={email}
-					/>
-					<label className="form-label" htmlFor="form3Example3">
-						Email address
-					</label>
-				</div>
-
-				<div className="form-outline mb-4">
-					<input
-						type="password"
-						id="password"
-						className="form-control"
-						required
-						onChange={handleChange}
-						name="password"
-						value={password}
-					/>
-					<label className="form-label" htmlFor="password">
-						Password
-					</label>
-				</div>
-				<div className="form-outline mb-4">
-					<input
-						type="password"
-						id="confirmpassword"
-						className="form-control"
-						required
-						onChange={handleChange}
-						name="confirmPassword"
-						value={confirmPassword}
-					/>
-					<label className="form-label" htmlFor="confirmpassword">
-						Confirm Password
-					</label>
-				</div>
-
-				<div className="text-center">
-					<button
-						type="submit"
-						className="btn btn-dark btn-sm btn-block mb-4 me-3"
-						onClick={handleSubmit}
-					>
-						Sign up
-					</button>
-					<button
-						type="reset"
-						className="btn btn-dark btn-sm btn-block mb-4 "
-						onClick={resetFormFields}
-					>
-						Reset
-					</button>
-				</div>
-
-				<div className="text-center">
-					<p>or sign up with:</p>
-					<button type="button" className="btn btn-primary btn-floating mx-1">
-						<i className="fab fa-facebook-f"></i>
-					</button>
-
-					<button type="button" className="btn btn-primary btn-floating mx-1">
-						<i className="fab fa-google"></i>
-					</button>
-
-					<button type="button" className="btn btn-primary btn-floating mx-1">
-						<i className="fab fa-twitter"></i>
-					</button>
-
-					<button type="button" className="btn btn-primary btn-floating mx-1">
-						<i className="fab fa-github"></i>
-					</button>
+						<div className="text-center mt-3 col-lg-4 mx-auto d-grid gap-2">
+							<button
+								type="submit"
+								className="btn btn-dark btn-lg btn-block "
+								onClick={handleSubmit}
+							>
+								Sign up
+							</button>
+							<button
+								type="reset"
+								className="btn btn-danger btn-lg btn-block mb-2"
+								onClick={resetFormFields}
+								value="Reset"
+							>
+								Reset
+							</button>
+						</div>
+					</fieldset>
 				</div>
 			</form>
 		</Fragment>

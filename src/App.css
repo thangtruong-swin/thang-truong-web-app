@@ -6,6 +6,7 @@ body {
 
 .custom-font-family {
   font-family: 'Poppins', sans-serif;
-  text-transform: capitalize;
+  /* text-transform: lowercase; */
+  font-size: 15px;
   /* color: red; */
 }

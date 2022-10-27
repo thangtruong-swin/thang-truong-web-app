@@ -1,18 +1,22 @@
 import { Fragment, useContext } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getRedirectResult } from "firebase/auth";
 import Header from "../Header/header-components";
 import { UserContext } from "../../Context/user.context-component";
-
 import LoginAvatar from "../../assets/image.png";
 import {
-	auth,
 	signInWithGooglePopup,
 	createUserDocumentFromAuth,
 	signInWithGoogleRedirect,
+	signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
+
 import "./login-component-styles.css";
 
+const defaultFormFields = {
+	email: "",
+	password: "",
+};
 const Login = () => {
 	// useEffect(() => {
 	// 	// Should be wrap by a functoin
@@ -27,80 +31,86 @@ const Login = () => {
 	// 	// then call it here
 	// 	loadUser();
 	// }, []);
-
+	const [formFields, setFormFields] = useState(defaultFormFields);
+	const { email, password } = formFields;
+	const resetFormFields = () => {
+		setFormFields(defaultFormFields);
+	};
 	const { setCurrentUser } = useContext(UserContext);
 
 	const logGoogleUser = async () => {
 		const { user } = await signInWithGooglePopup();
-		// console.log(user);
 
 		const userDocRef = await createUserDocumentFromAuth(user);
-		// console.log(userDocRef);
 		setCurrentUser(user);
-		// console.log(user.displayName);
-		// console.log(user.photoURL);
 	};
-	// const logGoogleRedirectUser = async () => {
-	// 	const { user } = await signInWithGoogleRedirect();
-	// 	console.log(user);
-	// };
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		alert("Clicked on Sign in button");
+
+		try {
+			const resposne = await signInAuthUserWithEmailAndPassword(
+				email,
+				password
+			);
+			console.log(resposne);
+			resetFormFields();
+		} catch (error) {
+			console.log("user sign in failed", error);
+		}
+	};
 	return (
 		<Fragment>
 			<Header />
-			<div className="container w-50 ">
-				<img src={LoginAvatar} alt="LoginAvatar" className="mx-auto d-block" />
-				<h1 className="h3 mb-3 fw-normal text-center text-danger">
-					Please sign in
-				</h1>
-				<div className="form-floating">
-					<input
-						type="email"
-						className="form-control"
-						id="floatingInputEmail"
-						placeholder="Email address"
+			<form onSubmit={handleSubmit}>
+				<div className="container-sm">
+					<img
+						src={LoginAvatar}
+						alt="LoginAvatar"
+						className="mx-auto d-block"
 					/>
-					<label htmlFor="floatingInputEmail">Please enter email address</label>
-				</div>
-				<div className="form-floating mt-3">
-					<input
-						type="password"
-						className="form-control"
-						id="floatingInputPassword"
-						placeholder="Enter Password"
-					/>
-					<label htmlFor="floatingInputPassword">Please enter Password</label>
-				</div>
-
-				<div className="checkbox mb-3 mt-3">
-					{/* <label>
-						<input type="checkbox" value="remember-me" /> Remember me
-					</label> */}
-					<label>
+					<h1 className="h3 mb-3 fw-normal text-center text-danger fs-2">
+						Please Sign-in
+					</h1>
+					<div className="form-floating col-lg-4 mx-auto">
 						<input
-							type="reset"
-							className="btn btn-outline-dark btn-sm"
-							value="Reset "
+							type="email"
+							className="form-control"
+							id="floatingInputEmail"
+							placeholder="Email address"
 						/>
-					</label>
-				</div>
-				<div className="d-flex justify-content-center">
-					<button className="w-50 btn  btn-outline-dark me-3" type="submit">
-						Sign in
-					</button>
-					<button
-						className="w-50 btn btn-outline-primary "
-						type="submit"
-						onClick={logGoogleUser}
-					>
-						<img
-							width="20px"
-							alt="Google sign-in"
-							src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-							className="me-2"
+						<label htmlFor="floatingInputEmail">
+							Please enter email address
+						</label>
+					</div>
+					<div className="form-floating mt-3 col-lg-4 mx-auto">
+						<input
+							type="password"
+							className="form-control"
+							id="floatingInputPassword"
+							placeholder="Enter Password"
 						/>
-						Sign in with Google Popup
-					</button>
-					{/* <button
+						<label htmlFor="floatingInputPassword">Please enter Password</label>
+					</div>
+
+					<div className="d-flex justify-content-center col-lg-4 mx-auto mt-3">
+						<button className="w-50 btn  btn-dark me-3" type="submit">
+							Sign in
+						</button>
+						<button
+							className="w-50 btn btn-primary "
+							type="submit"
+							onClick={logGoogleUser}
+						>
+							<img
+								width="20px"
+								alt="Google sign-in"
+								src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
+								className="me-2"
+							/>
+							Sign in with Google
+						</button>
+						{/* <button
 						className="w-50 btn btn-outline-primary ms-3"
 						type="submit"
 						onClick={logGoogleRedirectUser}
@@ -113,8 +123,18 @@ const Login = () => {
 						/>
 						Sign in with Google Redirect
 					</button> */}
+					</div>
+					<div className="checkbox mb-3 mt-3 col-lg-4 mx-auto d-grid gap-2">
+						<button
+							type="reset"
+							className="btn btn-danger btn-lg btn-block mb-2"
+							value="Reset"
+						>
+							Reset
+						</button>
+					</div>
 				</div>
-			</div>
+			</form>
 		</Fragment>
 	);
 };

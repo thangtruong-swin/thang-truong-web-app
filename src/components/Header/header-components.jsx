@@ -20,14 +20,14 @@ const Header = () => {
 
 	return (
 		<Fragment>
-			<div className="container-fluid bg-warning bg-gradient p-2 ">
+			<div className="container-fluid bg-warning bg-gradient p-2 d-flex justify-content-between">
 				<i className="fa-solid fa-truck me-5 fst-italic">
 					<span className="ms-2 custom-font-family">
-						Free Delivery over $100
+						Free delivery over $100
 					</span>
 				</i>
 				<i className="fa-solid fa-person-walking-arrow-loop-left fst-italic">
-					<span className="ms-2 custom-font-family">Free Return</span>
+					<span className="ms-2 custom-font-family">Free return in 30days</span>
 				</i>
 			</div>
 			<div className="navbar navbar-expand-lg navbar-dark bg-success bg-gradient">
