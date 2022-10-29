@@ -11,11 +11,14 @@ import Contactus from "./components/ContactUs/contactus-component";
 import Login from "./components/Login/login-conponent";
 import SignUp from "./components/SignUp/sign-up-component";
 import Dashboard from "./components/Dashboard/dashboard-component";
+import { getAuth } from "firebase/auth";
 import "./App.css";
 
 function App() {
 	const { currentUser } = useContext(UserContext);
-	// alert(currentUser);
+	const auth = getAuth();
+	const user = auth.currentUser;
+
 	return (
 		<Routes>
 			<Route path="/" element={<Header />}></Route>
@@ -24,8 +27,14 @@ function App() {
 			<Route path="/shop" element={<Shop />}></Route>
 			<Route path="/categories" element={<Categories />}></Route>
 			<Route path="/contact-us" element={<Contactus />}></Route>
-			<Route path="/login" element={<Login />}></Route>
-			<Route path="/sign-up" element={<SignUp />}></Route>
+			<Route
+				path="/login"
+				element={user ? <Navigate to="/" replace /> : <Login />}
+			></Route>
+			<Route
+				path="/sign-up"
+				element={user ? <Navigate to="/" replace /> : <SignUp />}
+			></Route>
 			<Route path="/dashboard" element={<Dashboard />}></Route>
 		</Routes>
 	);

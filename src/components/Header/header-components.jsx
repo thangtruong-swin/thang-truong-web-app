@@ -1,9 +1,9 @@
 import React from "react";
-import { Fragment, useContext } from "react";
+import { useState, Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
-
-import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { signOutUser, auth } from "../../utils/firebase/firebase.utils";
 import { UserContext } from "../../Context/user.context-component";
 import { GrReactjs } from "react-icons/gr";
 import LoginAvatar from "../../assets/image.png";
@@ -12,11 +12,21 @@ import "./header-component-style.css";
 
 const Header = () => {
 	const { currentUser, setCurrentUser } = useContext(UserContext);
-
+	// const [displayName, setdisplayName] = useState("");
 	const signOutHandler = async () => {
 		await signOutUser();
 		setCurrentUser(null);
+		// setdisplayName(null);
 	};
+
+	const user = auth.currentUser;
+	onAuthStateChanged(auth, (user) => {
+		if (user) {
+			setCurrentUser(user);
+		} else {
+			signOutHandler();
+		}
+	});
 
 	return (
 		<Fragment>
@@ -170,22 +180,23 @@ const Header = () => {
 						</li>
 					</ul>
 					<div className="ms-2">
-						{currentUser ? (
+						{user ? (
 							<span className="btn dropdown me-2">
 								<a
 									href="#"
-									className="link-dark text-decoration-none dropdown-toggle"
+									className="link-dark text-decoration-none dropdown-toggle text-warning"
 									data-bs-toggle="dropdown"
 									aria-expanded="false"
 								>
 									<img
-										src={currentUser.photoURL}
+										src={user.photoURL}
 										// src={LoginAvatar}
 										alt="mdo"
 										width="32"
 										height="32"
 										className="rounded-circle "
 									/>
+									<span className="ms-2 text-warning">{user.displayName}</span>
 								</a>
 								<ul className="dropdown-menu">
 									<Link
@@ -218,7 +229,7 @@ const Header = () => {
 							</Link>
 						)}
 
-						{currentUser ? (
+						{user ? (
 							<Link
 								className="btn btn-outline-warning bg-gradient me-5"
 								style={{

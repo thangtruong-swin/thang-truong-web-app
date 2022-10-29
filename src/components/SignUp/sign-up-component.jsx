@@ -1,10 +1,12 @@
 import Header from "../Header/header-components";
 import { Fragment, useState, useContext } from "react";
 import { UserContext } from "../../Context/user.context-component";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import {
 	CreateAuthWithUserAndPassword,
 	createUserDocumentFromAuth,
+	auth,
 } from "../../utils/firebase/firebase.utils";
 const defaultFormFields = {
 	displayName: "",
@@ -18,34 +20,35 @@ const SignUp = () => {
 
 	const { setCurrentUser } = useContext(UserContext);
 
-	const handleChange = (event) => {
-		const { name, value } = event.target;
-		setFormFields({ ...formFields, [name]: value });
-		// console.log(formFields);
-	};
-
 	const resetFormFields = () => {
 		setFormFields(defaultFormFields);
 	};
 
+	const handleChange = (event) => {
+		const { name, value } = event.target;
+		setFormFields({ ...formFields, [name]: value });
+		// console.log(formFields.displayName);
+	};
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+
 		if (password !== confirmPassword) {
 			alert("password does not matching");
 			return;
 		}
-
 		try {
 			const { user } = await CreateAuthWithUserAndPassword(
+				displayName,
 				email,
-				password,
-				displayName
+				password
 			);
-			setCurrentUser(user);
-			await createUserDocumentFromAuth(user, { displayName });
+			await createUserDocumentFromAuth(user, {
+				displayName,
+			});
 			resetFormFields();
-
-			// console.log("response: ", user);
+			setCurrentUser(user);
+			console.log("user.displayName: ", user.displayName);
 		} catch (error) {
 			if (error.code === "auth/email-already-in-use") {
 				alert("Email-already-in-use");

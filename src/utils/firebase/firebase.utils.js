@@ -8,7 +8,6 @@ import {
 	GoogleAuthProvider,
 	createUserWithEmailAndPassword,
 	signOut,
-	onAuthStateChanged,
 	signInWithEmailAndPassword,
 } from "firebase/auth";
 
@@ -31,6 +30,7 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
+
 export const signInWithGooglePopup = () =>
 	signInWithPopup(auth, googleProvider);
 
@@ -80,9 +80,6 @@ export const createUserDocumentFromAuth = async (
 
 	return userDocRef;
 };
-
-export const onAuthStateChangedListener = (callback) =>
-	onAuthStateChanged(auth, callback);
 
 export const signOutUser = async () => await signOut(auth);
 

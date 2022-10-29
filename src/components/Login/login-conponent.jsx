@@ -1,11 +1,16 @@
 import { Fragment, useContext } from "react";
 import { useEffect, useState } from "react";
-import { getRedirectResult } from "firebase/auth";
+import {
+	getRedirectResult,
+	updateProfile,
+	onAuthStateChanged,
+} from "firebase/auth";
 import Header from "../Header/header-components";
 import { UserContext } from "../../Context/user.context-component";
 import LoginAvatar from "../../assets/image.png";
 import {
 	signInWithGooglePopup,
+	auth,
 	createUserDocumentFromAuth,
 	signInWithGoogleRedirect,
 	signInAuthUserWithEmailAndPassword,
@@ -18,6 +23,8 @@ const defaultFormFields = {
 	password: "",
 };
 const Login = () => {
+	const { currentUser, setCurrentUser } = useContext(UserContext);
+
 	// useEffect(() => {
 	// 	// Should be wrap by a functoin
 	// 	const loadUser = async () => {
@@ -33,10 +40,10 @@ const Login = () => {
 	// }, []);
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { email, password } = formFields;
+
 	const resetFormFields = () => {
 		setFormFields(defaultFormFields);
 	};
-	const { setCurrentUser } = useContext(UserContext);
 
 	const logGoogleUser = async () => {
 		const { user } = await signInWithGooglePopup();
@@ -44,20 +51,58 @@ const Login = () => {
 		const userDocRef = await createUserDocumentFromAuth(user);
 		setCurrentUser(user);
 	};
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		alert("Clicked on Sign in button");
+		const user = auth.currentUser;
+		if (user !== null) {
+			// The user object has basic properties such as display name, email, etc.
+			const displayName = user.displayName;
+			console.log("displayName: ", displayName);
 
-		try {
-			const resposne = await signInAuthUserWithEmailAndPassword(
-				email,
-				password
-			);
-			console.log(resposne);
-			resetFormFields();
-		} catch (error) {
-			console.log("user sign in failed", error);
+			const email = user.email;
+			console.log("email: ", email);
+
+			const photoURL = user.photoURL;
+			console.log("photoURL: ", photoURL);
+
+			const emailVerified = user.emailVerified;
+			console.log("emailVerified: ", emailVerified);
+
+			// The user's ID, unique to the Firebase project. Do NOT use
+			// this value to authenticate with your backend server, if
+			// you have one. Use User.getToken() instead.
+			const uid = user.uid;
 		}
+		// const user = auth.currentUser;
+		// const displayName = user.displayName;
+		// if (user !== null) {
+		// 	user.providerData.forEach((profile) => {
+		// 		console.log("Sign-in provider: " + profile.providerId);
+		// 		console.log("  Provider-specific UID: " + profile.uid);
+		// 		console.log("  Name: " + profile.displayName);
+		// 		console.log("  Email: " + profile.email);
+		// 		console.log("  Photo URL: " + profile.photoURL);
+		// 	});
+		// }
+		// try {
+		// 	const { user } = await signInAuthUserWithEmailAndPassword(
+		// 		email,
+		// 		password,
+		// 		displayName
+		// 	);
+		// 	setCurrentUser(user);
+		// 	// console.log(user);
+		// 	resetFormFields();
+		// } catch (error) {
+		// 	console.log("user sign in failed", error);
+		// }
+	};
+
+	const handleChange = (event) => {
+		const { name, value } = event.target;
+
+		setFormFields({ ...formFields, [name]: value });
 	};
 	return (
 		<Fragment>
@@ -78,6 +123,10 @@ const Login = () => {
 							className="form-control"
 							id="floatingInputEmail"
 							placeholder="Email address"
+							required
+							name="email"
+							value={email}
+							onChange={handleChange}
 						/>
 						<label htmlFor="floatingInputEmail">
 							Please enter email address
@@ -89,6 +138,10 @@ const Login = () => {
 							className="form-control"
 							id="floatingInputPassword"
 							placeholder="Enter Password"
+							required
+							name="password"
+							value={password}
+							onChange={handleChange}
 						/>
 						<label htmlFor="floatingInputPassword">Please enter Password</label>
 					</div>
