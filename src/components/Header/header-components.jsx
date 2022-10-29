@@ -2,17 +2,17 @@ import React from "react";
 import { useState, Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { updateProfile, onAuthStateChanged } from "firebase/auth";
 import { signOutUser, auth } from "../../utils/firebase/firebase.utils";
 import { UserContext } from "../../Context/user.context-component";
 import { GrReactjs } from "react-icons/gr";
-import LoginAvatar from "../../assets/image.png";
+import LoginAvatar from "../../assets/LoginAvatar.png";
 
 import "./header-component-style.css";
 
 const Header = () => {
 	const { currentUser, setCurrentUser } = useContext(UserContext);
-	// const [displayName, setdisplayName] = useState("");
+	const [displayName, setdisplayName] = useState("");
 	const signOutHandler = async () => {
 		await signOutUser();
 		setCurrentUser(null);
@@ -20,9 +20,15 @@ const Header = () => {
 	};
 
 	const user = auth.currentUser;
+
 	onAuthStateChanged(auth, (user) => {
 		if (user) {
 			setCurrentUser(user);
+			setdisplayName(user.displayName);
+			// console.log("user.LoginAvatar: ", user.LoginAvatar);
+			// console.log("displayName: ", user.displayName);
+			// console.log("email:", user.email);
+			// console.log("photoURL: ", user.photoURL);
 		} else {
 			signOutHandler();
 		}
@@ -190,7 +196,6 @@ const Header = () => {
 								>
 									<img
 										src={user.photoURL}
-										// src={LoginAvatar}
 										alt="mdo"
 										width="32"
 										height="32"

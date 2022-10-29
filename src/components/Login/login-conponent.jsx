@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import Header from "../Header/header-components";
 import { UserContext } from "../../Context/user.context-component";
-import LoginAvatar from "../../assets/image.png";
+import LoginAvatar from "../../assets/LoginAvatar.png";
 import {
 	signInWithGooglePopup,
 	auth,
@@ -54,27 +54,27 @@ const Login = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		const user = auth.currentUser;
-		if (user !== null) {
-			// The user object has basic properties such as display name, email, etc.
-			const displayName = user.displayName;
-			console.log("displayName: ", displayName);
-
-			const email = user.email;
-			console.log("email: ", email);
-
-			const photoURL = user.photoURL;
-			console.log("photoURL: ", photoURL);
-
-			const emailVerified = user.emailVerified;
-			console.log("emailVerified: ", emailVerified);
-
-			// The user's ID, unique to the Firebase project. Do NOT use
-			// this value to authenticate with your backend server, if
-			// you have one. Use User.getToken() instead.
-			const uid = user.uid;
-		}
 		// const user = auth.currentUser;
+		// if (user !== null) {
+		// 	// The user object has basic properties such as display name, email, etc.
+		// 	const displayName = user.displayName;
+		// 	console.log("displayName: ", displayName);
+
+		// 	const email = user.email;
+		// 	console.log("email: ", email);
+
+		// 	const photoURL = user.photoURL;
+		// 	console.log("photoURL: ", photoURL);
+
+		// 	const emailVerified = user.emailVerified;
+		// 	console.log("emailVerified: ", emailVerified);
+
+		// 	// The user's ID, unique to the Firebase project. Do NOT use
+		// 	// this value to authenticate with your backend server, if
+		// 	// you have one. Use User.getToken() instead.
+		// 	const uid = user.uid;
+		// }
+		const user = auth.currentUser;
 		// const displayName = user.displayName;
 		// if (user !== null) {
 		// 	user.providerData.forEach((profile) => {
@@ -85,18 +85,17 @@ const Login = () => {
 		// 		console.log("  Photo URL: " + profile.photoURL);
 		// 	});
 		// }
-		// try {
-		// 	const { user } = await signInAuthUserWithEmailAndPassword(
-		// 		email,
-		// 		password,
-		// 		displayName
-		// 	);
-		// 	setCurrentUser(user);
-		// 	// console.log(user);
-		// 	resetFormFields();
-		// } catch (error) {
-		// 	console.log("user sign in failed", error);
-		// }
+		try {
+			const { user } = await signInAuthUserWithEmailAndPassword(
+				email,
+				password
+			);
+			setCurrentUser(user);
+			// console.log(user);
+			resetFormFields();
+		} catch (error) {
+			console.log("user sign in failed", error);
+		}
 	};
 
 	const handleChange = (event) => {
