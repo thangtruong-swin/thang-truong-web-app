@@ -11,14 +11,14 @@ import {
 	signInAuthUserWithEmailAndPassword,
 } from "../../../utils/firebase/firebase.utils";
 
-import "./Sign-In-component-styles.css";
+import "./sign-In-component-styles.css";
 
 const defaultFormFields = {
 	email: "",
 	password: "",
 };
 const Login = () => {
-	const { currentUser, setCurrentUser } = useContext(UserContext);
+	const { setCurrentUser } = useContext(UserContext);
 
 	// useEffect(() => {
 	// 	// Should be wrap by a functoin
@@ -40,23 +40,21 @@ const Login = () => {
 		setFormFields(defaultFormFields);
 	};
 
-	const logGoogleUser = async () => {
+	const signInWithGoogle = async () => {
 		const { user } = await signInWithGooglePopup();
-
-		const userDocRef = await createUserDocumentFromAuth(user);
-		setCurrentUser(user);
+		// const userDocRef = await createUserDocumentFromAuth(user);
+		// setCurrentUser(user);
 	};
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		const user = auth.currentUser;
+		// const user = auth.currentUser;
 		try {
 			const { user } = await signInAuthUserWithEmailAndPassword(
 				email,
 				password
 			);
 			setCurrentUser(user);
-			// console.log(user);
 			resetFormFields();
 		} catch (error) {
 			console.log("user sign in failed", error);
@@ -126,7 +124,7 @@ const Login = () => {
 						<button
 							className="w-50 btn btn-primary "
 							type="submit"
-							onClick={logGoogleUser}
+							onClick={signInWithGoogle}
 						>
 							<img
 								width="20px"

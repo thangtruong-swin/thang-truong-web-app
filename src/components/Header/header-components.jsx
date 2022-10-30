@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, Fragment, useContext } from "react";
+import { useState, useEffect, Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 import { updateProfile, onAuthStateChanged } from "firebase/auth";
@@ -12,7 +12,7 @@ import "./header-component-style.css";
 
 const Header = () => {
 	const { currentUser, setCurrentUser } = useContext(UserContext);
-	const [displayName, setdisplayName] = useState("");
+	// const [displayName, setdisplayName] = useState("");
 	const signOutHandler = async () => {
 		await signOutUser();
 		setCurrentUser(null);
@@ -20,26 +20,26 @@ const Header = () => {
 	};
 
 	const user = auth.currentUser;
-
-	onAuthStateChanged(auth, (user) => {
-		if (user) {
-			setCurrentUser(user);
-			setdisplayName(user.displayName);
-		} else {
-			signOutHandler();
-		}
-	});
+	console.log("called");
+	// onAuthStateChanged(auth, (user) => {
+	// 	if (user) {
+	// 		setCurrentUser(user);
+	// 		// setdisplayName(user.displayName);
+	// 	} else {
+	// 		signOutHandler();
+	// 	}
+	// });
 
 	return (
 		<Fragment>
 			<div className="container-fluid bg-warning bg-gradient p-2 d-flex justify-content-between">
 				<i className="fa-solid fa-truck me-5 fst-italic">
-					<span className="ms-2 custom-font-family">
+					<span className="ms-1 custom-font-family">
 						Free delivery over $100
 					</span>
 				</i>
 				<i className="fa-solid fa-person-walking-arrow-loop-left fst-italic">
-					<span className="ms-2 custom-font-family">Free return in 30days</span>
+					<span className="ms-1 custom-font-family">Free return in 30days</span>
 				</i>
 			</div>
 			<div className="navbar navbar-expand-lg navbar-dark bg-success bg-gradient">
@@ -105,9 +105,9 @@ const Header = () => {
 								// 	fontWeight: "bold",
 								// 	// fontSize: 20,
 								// }}
-								to="/sale"
+								to="/shop"
 							>
-								Sales
+								Shop
 							</Link>
 						</li>
 

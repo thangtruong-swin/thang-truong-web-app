@@ -19,8 +19,7 @@ const defaultFormFields = {
 };
 const SignUp = () => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
-	const { displayName, email, photoURL, password, confirmPassword } =
-		formFields;
+	const { displayName, email, password, confirmPassword } = formFields;
 
 	const { setCurrentUser } = useContext(UserContext);
 
@@ -56,11 +55,12 @@ const SignUp = () => {
 			await updateProfile(auth.currentUser, {
 				displayName,
 				photoURL,
-			}).then(function () {
-				console.log("user.displayName-updateProfile: ", user.displayName);
-				console.log("user.photoURL: ", user.photoURL);
 			});
 
+			// .then(function () {
+			// 	console.log("user.displayName-updateProfile: ", user.displayName);
+			// 	console.log("user.photoURL: ", user.photoURL);
+			// });
 			resetFormFields();
 			setCurrentUser(user);
 		} catch (error) {
