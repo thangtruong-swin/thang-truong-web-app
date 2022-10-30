@@ -25,10 +25,6 @@ const Header = () => {
 		if (user) {
 			setCurrentUser(user);
 			setdisplayName(user.displayName);
-			// console.log("user.LoginAvatar: ", user.LoginAvatar);
-			// console.log("displayName: ", user.displayName);
-			// console.log("email:", user.email);
-			// console.log("photoURL: ", user.photoURL);
 		} else {
 			signOutHandler();
 		}
@@ -49,14 +45,14 @@ const Header = () => {
 			<div className="navbar navbar-expand-lg navbar-dark bg-success bg-gradient">
 				<div className="col">
 					<div className="d-flex justify-content-between">
-						<Link className="navbar-brand ms-3" to="/">
+						<Link className=" ms-3" to="/">
 							<GrReactjs
-								className="logo-icon fa-5x "
-								style={{ color: "white" }}
-								size={70}
+							// className="logo-icon fa-5x"
+							// style={{ color: "white" }}
+							// size={50}
 							/>
 						</Link>
-						<ShoppingIcon className="mt-1 text-dark" />
+						<ShoppingIcon className="mx-auto" />
 						<button
 							className="navbar-toggler me-2"
 							type="button"
@@ -70,17 +66,17 @@ const Header = () => {
 						</button>
 					</div>
 				</div>
-				<div className="col collapse navbar-collapse fs-6 " id="navbarScroll">
-					<ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll ms-2 text-uppercase">
-						<li className="nav-item">
+				<div className="col collapse navbar-collapse" id="navbarScroll">
+					<ul className="navbar-nav me-auto  ms-2">
+						<li className="nav-item ">
 							<Link
-								className="nav-link"
-								style={{
-									textDecoration: "none",
-									color: "goldenrod",
-									fontWeight: "bold",
-									fontSize: 20,
-								}}
+								className="nav-link navbar-brand"
+								// style={{
+								// 	textDecoration: "none",
+								// 	color: "goldenrod",
+								// 	fontWeight: "bold",
+								// 	// fontSize: 18,
+								// }}
 								to="/"
 							>
 								Home
@@ -88,13 +84,13 @@ const Header = () => {
 						</li>
 						<li className="nav-item">
 							<Link
-								className="nav-link"
-								style={{
-									textDecoration: "none",
-									color: "goldenrod",
-									fontWeight: "bold",
-									fontSize: 20,
-								}}
+								className="nav-link navbar-brand"
+								// style={{
+								// 	textDecoration: "none",
+								// 	color: "goldenrod",
+								// 	fontWeight: "bold",
+								// 	// fontSize: 20,
+								// }}
 								to="/new-arrival"
 							>
 								New Arrival
@@ -102,60 +98,49 @@ const Header = () => {
 						</li>
 						<li className="nav-item">
 							<Link
-								className="nav-link"
-								style={{
-									textDecoration: "none",
-									color: "goldenrod",
-									fontWeight: "bold",
-									fontSize: 20,
-								}}
+								className="nav-link navbar-brand"
+								// style={{
+								// 	textDecoration: "none",
+								// 	color: "goldenrod",
+								// 	fontWeight: "bold",
+								// 	// fontSize: 20,
+								// }}
 								to="/sale"
 							>
-								Sale
+								Sales
 							</Link>
 						</li>
 
-						<li className="nav-item">
-							<Link
-								className="nav-link"
-								style={{
-									textDecoration: "none",
-									color: "goldenrod",
-									fontWeight: "bold",
-									fontSize: 20,
-								}}
-								to="/shop"
-							>
-								Shop
-							</Link>
-						</li>
 						<li className="nav-item dropdown">
 							<Link
-								className="nav-link dropdown-toggle"
+								className="nav-link dropdown-toggle navbar-brand text-capitalize "
 								id="navbarDropdown"
 								role="button"
 								data-bs-toggle="dropdown"
 								aria-expanded="false"
-								style={{
-									textDecoration: "none",
-									color: "goldenrod",
-									fontWeight: "bold",
-									fontSize: 20,
-								}}
+								// style={{
+								// 	textDecoration: "none",
+								// 	color: "goldenrod",
+								// 	fontWeight: "bold",
+								// }}
 								to="/categories"
 							>
 								Categories
 							</Link>
-							<ul className="dropdown-menu " aria-labelledby="navbarDropdown">
+							<ul
+								className="dropdown-menu mt-3"
+								aria-labelledby="navbarDropdown"
+							>
 								<li>
-									<Link className="dropdown-item" to="/shop">
-										Action
+									<Link className="dropdown-item font-monospace" to="/sale">
+										Sneakers
 									</Link>
 								</li>
+								<hr className="dropdown-divider" />
 
 								<li>
-									<Link className="dropdown-item" to="/shop">
-										Action 2
+									<Link className="dropdown-item font-monospace" to="/sale">
+										Clothes
 									</Link>
 								</li>
 
@@ -163,54 +148,58 @@ const Header = () => {
 									<hr className="dropdown-divider" />
 								</li>
 								<li>
-									<Link className="dropdown-item" to="/shop">
-										Action 3
+									<Link className="dropdown-item font-monospace" to="/sale">
+										Hats
 									</Link>
 								</li>
 							</ul>
 						</li>
-
-						<li className="nav-item">
-							<Link
-								className="nav-link"
-								style={{
-									textDecoration: "none",
-									color: "goldenrod",
-									fontWeight: "bold",
-									fontSize: 20,
-								}}
-								to="/contact-us"
-							>
-								Contact Us
-							</Link>
-						</li>
 					</ul>
-					<div className="ms-2">
+					<div className="me-5">
 						{user ? (
-							<span className="btn dropdown me-2">
+							<span className="btn dropdown">
 								<a
 									href="#"
-									className="link-dark text-decoration-none dropdown-toggle text-warning"
+									className="text-decoration-none dropdown-toggle navbar-brand"
 									data-bs-toggle="dropdown"
 									aria-expanded="false"
 								>
 									<img
 										src={user.photoURL}
-										alt="mdo"
+										alt="photoURL"
 										width="32"
 										height="32"
-										className="rounded-circle "
+										className="rounded"
 									/>
-									<span className="ms-2 text-warning">{user.displayName}</span>
+									<span
+										className="ms-1 me-auto fw-1 "
+										style={{
+											fontSize: 14,
+										}}
+									>
+										<span className="font-monospace">{user.displayName}</span>
+									</span>
 								</a>
-								<ul className="dropdown-menu">
+								<ul className="dropdown-menu text-dark ms-3 mt-2">
 									<Link
-										className="dropdown-item"
+										className="dropdown-item font-monospace"
 										type="button"
 										style={{
-											color: "red",
-											fontSize: 16,
-											textTransform: "capitalize",
+											fontSize: 14,
+											textTransform: "text-capitalize",
+										}}
+										to="/dashboard"
+									>
+										Dashboard
+									</Link>
+									<hr className="dropdown-divider" />
+
+									<Link
+										className="dropdown-item font-monospace"
+										type="button"
+										style={{
+											fontSize: 14,
+											textTransform: "text-capitalize",
 										}}
 										onClick={signOutHandler}
 										to="/"
@@ -221,44 +210,10 @@ const Header = () => {
 							</span>
 						) : (
 							<Link
-								className="btn btn-outline-dark bg-gradient me-2"
-								style={{
-									textDecoration: "none",
-									color: "black",
-									fontWeight: "bold",
-									fontSize: 16,
-								}}
+								className="btn btn-outline-dark bg-gradient ms-2 me-5 text-white"
 								to="/login"
 							>
 								Login
-							</Link>
-						)}
-
-						{user ? (
-							<Link
-								className="btn btn-outline-warning bg-gradient me-5"
-								style={{
-									textDecoration: "none",
-									color: "black",
-									fontWeight: "bold",
-									fontSize: 16,
-								}}
-								to="/dashboard"
-							>
-								Dashboard
-							</Link>
-						) : (
-							<Link
-								className="btn btn-outline-dark bg-gradient me-5"
-								style={{
-									textDecoration: "none",
-									color: "black",
-									fontWeight: "bold",
-									fontSize: 16,
-								}}
-								to="/sign-up"
-							>
-								Sign-up
 							</Link>
 						)}
 					</div>

@@ -8,8 +8,9 @@ import Sale from "./components/Sale/sale-component";
 import Shop from "./components/Shop/shop-component";
 import Categories from "./components/Categories/categories-component";
 import Contactus from "./components/ContactUs/contactus-component";
-import Login from "./components/Login/login-conponent";
-import SignUp from "./components/SignUp/sign-up-component";
+import SignIn from "./components/Authentication/Sign-In/Sign-In.conponent";
+import SignUp from "./components/Authentication/SignUp/sign-up-component";
+
 import Dashboard from "./components/Dashboard/dashboard-component";
 import { getAuth } from "firebase/auth";
 import "./App.css";
@@ -26,10 +27,9 @@ function App() {
 			<Route path="/sale" element={<Sale />}></Route>
 			<Route path="/shop" element={<Shop />}></Route>
 			<Route path="/categories" element={<Categories />}></Route>
-			<Route path="/contact-us" element={<Contactus />}></Route>
 			<Route
 				path="/login"
-				element={user ? <Navigate to="/" replace /> : <Login />}
+				element={user ? <Navigate to="/" replace /> : <SignIn />}
 			></Route>
 			<Route
 				path="/sign-up"

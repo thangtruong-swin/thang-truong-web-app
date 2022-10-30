@@ -1,22 +1,17 @@
 import { Fragment, useContext } from "react";
 import { useEffect, useState } from "react";
-import {
-	getRedirectResult,
-	updateProfile,
-	onAuthStateChanged,
-} from "firebase/auth";
-import Header from "../Header/header-components";
-import { UserContext } from "../../Context/user.context-component";
-import LoginAvatar from "../../assets/LoginAvatar.png";
+import { Outlet, Link } from "react-router-dom";
+import Header from "../../Header/header-components";
+import { UserContext } from "../../../Context/user.context-component";
+import LoginAvatar from "../../../assets/LoginAvatar.png";
 import {
 	signInWithGooglePopup,
 	auth,
 	createUserDocumentFromAuth,
-	signInWithGoogleRedirect,
 	signInAuthUserWithEmailAndPassword,
-} from "../../utils/firebase/firebase.utils";
+} from "../../../utils/firebase/firebase.utils";
 
-import "./login-component-styles.css";
+import "./Sign-In-component-styles.css";
 
 const defaultFormFields = {
 	email: "",
@@ -54,37 +49,7 @@ const Login = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		// const user = auth.currentUser;
-		// if (user !== null) {
-		// 	// The user object has basic properties such as display name, email, etc.
-		// 	const displayName = user.displayName;
-		// 	console.log("displayName: ", displayName);
-
-		// 	const email = user.email;
-		// 	console.log("email: ", email);
-
-		// 	const photoURL = user.photoURL;
-		// 	console.log("photoURL: ", photoURL);
-
-		// 	const emailVerified = user.emailVerified;
-		// 	console.log("emailVerified: ", emailVerified);
-
-		// 	// The user's ID, unique to the Firebase project. Do NOT use
-		// 	// this value to authenticate with your backend server, if
-		// 	// you have one. Use User.getToken() instead.
-		// 	const uid = user.uid;
-		// }
 		const user = auth.currentUser;
-		// const displayName = user.displayName;
-		// if (user !== null) {
-		// 	user.providerData.forEach((profile) => {
-		// 		console.log("Sign-in provider: " + profile.providerId);
-		// 		console.log("  Provider-specific UID: " + profile.uid);
-		// 		console.log("  Name: " + profile.displayName);
-		// 		console.log("  Email: " + profile.email);
-		// 		console.log("  Photo URL: " + profile.photoURL);
-		// 	});
-		// }
 		try {
 			const { user } = await signInAuthUserWithEmailAndPassword(
 				email,
@@ -121,13 +86,13 @@ const Login = () => {
 							type="email"
 							className="form-control"
 							id="floatingInputEmail"
-							placeholder="Email address"
+							placeholder="name@example.com"
 							required
 							name="email"
 							value={email}
 							onChange={handleChange}
 						/>
-						<label htmlFor="floatingInputEmail">
+						<label htmlFor="floatingInputEmail" className="text-muted">
 							Please enter email address
 						</label>
 					</div>
@@ -142,7 +107,16 @@ const Login = () => {
 							value={password}
 							onChange={handleChange}
 						/>
-						<label htmlFor="floatingInputPassword">Please enter Password</label>
+						<label htmlFor="floatingInputPassword" className="text-muted">
+							Please enter password
+						</label>
+					</div>
+					<div className="form-floating mt-3 col-lg-4 mx-auto text-center">
+						<span>Don't have an account ?</span>
+						<Link to="/sign-up" className="text-decoration-none">
+							{" "}
+							Please Sign-Up
+						</Link>
 					</div>
 
 					<div className="d-flex justify-content-center col-lg-4 mx-auto mt-3">
@@ -180,6 +154,7 @@ const Login = () => {
 						<button
 							type="reset"
 							className="btn btn-danger btn-lg btn-block mb-2"
+							onClick={resetFormFields}
 							value="Reset"
 						>
 							Reset

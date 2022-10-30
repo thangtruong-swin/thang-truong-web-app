@@ -1,7 +1,7 @@
-import Header from "../Header/header-components";
+import Header from "../../Header/header-components";
 import { Fragment, useState, useContext, useEffect } from "react";
-import { UserContext } from "../../Context/user.context-component";
-// import { storage } from "../../utils/firebase/firebase.utils";
+import { UserContext } from "../../../Context/user.context-component";
+import { Outlet, Link } from "react-router-dom";
 
 import { updateProfile } from "firebase/auth";
 import { ref, getStorage, getDownloadURL, uploadBytes } from "firebase/storage";
@@ -9,7 +9,7 @@ import {
 	CreateAuthWithUserAndPassword,
 	createUserDocumentFromAuth,
 	auth,
-} from "../../utils/firebase/firebase.utils";
+} from "../../../utils/firebase/firebase.utils";
 const defaultFormFields = {
 	displayName: "",
 	email: "",
@@ -83,28 +83,32 @@ const SignUp = () => {
 							<input
 								type="text"
 								id="formFloatingDisplayName"
-								placeholder="Please Enter Display Name"
+								placeholder="Display name"
 								className="form-control"
 								required
 								onChange={handleChange}
 								name="displayName"
 								value={displayName}
 							/>
-							<label htmlFor="formFloatingDisplayName">Display name</label>
+							<label htmlFor="formFloatingDisplayName" className="text-muted">
+								Display name
+							</label>
 						</div>
 
 						<div className="form-floating mt-3 col-lg-4 mx-auto">
 							<input
 								type="email"
 								id="formFloatingEmail"
-								placeholder="Please Enter Email Address"
+								placeholder="Email address"
 								className="form-control"
 								required
 								onChange={handleChange}
 								name="email"
 								value={email}
 							/>
-							<label htmlFor="formFloatingEmail">Email address</label>
+							<label htmlFor="formFloatingEmail" className="text-muted">
+								Email address
+							</label>
 						</div>
 						{/* File Picker
 						<div className="form-floating mt-3 col-lg-4 mx-auto">
@@ -125,29 +129,41 @@ const SignUp = () => {
 							<input
 								type="password"
 								id="formFloatingPassword"
-								placeholder="Please Enter Password"
+								placeholder="Please enter password"
 								className="form-control"
 								required
 								onChange={handleChange}
 								name="password"
 								value={password}
 							/>
-							<label htmlFor="formFloatingPassword">Password</label>
+							<label htmlFor="formFloatingPassword" className="text-muted">
+								Please enter password
+							</label>
 						</div>
 						<div className="form-floating mt-3 col-lg-4 mx-auto">
 							<input
 								type="password"
 								id="formFloatingConfirmpassword"
-								placeholder="Please Enter Confirm Password"
+								placeholder="Please enter confirm password"
 								className="form-control"
 								required
 								onChange={handleChange}
 								name="confirmPassword"
 								value={confirmPassword}
 							/>
-							<label htmlFor="formFloatingConfirmpassword">
-								Confirm Password
+							<label
+								htmlFor="formFloatingConfirmpassword"
+								className="text-muted"
+							>
+								Please enter confirm password
 							</label>
+						</div>
+						<div className="form-floating mt-3 col-lg-4 mx-auto text-center">
+							<span>Already have an account ?</span>
+							<Link to="/login" className="text-decoration-none">
+								{" "}
+								Please Sign-In
+							</Link>
 						</div>
 
 						<div className="text-center mt-3 col-lg-4 mx-auto d-grid gap-2">
@@ -170,6 +186,7 @@ const SignUp = () => {
 					</fieldset>
 				</div>
 			</form>
+			<Outlet />
 		</Fragment>
 	);
 };
