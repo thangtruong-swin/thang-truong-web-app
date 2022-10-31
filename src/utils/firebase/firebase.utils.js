@@ -54,6 +54,7 @@ export const CreateAuthWithUserAndPassword = async (email, password) => {
 
 export const db = getFirestore();
 
+// Add data to FireStore
 export const addCollectionAndDocuments = async (
 	collectionKey,
 	objectsToAdd
@@ -84,6 +85,9 @@ export const getCategoriesAndDocuments = async () => {
 	return categoryMap;
 };
 
+export const getListNewArrivalProducts = async () => {
+	const responseCategoryMap = getCategoriesAndDocuments();
+};
 export const createUserDocumentFromAuth = async (
 	userAuth,
 	additionalInformation = {}

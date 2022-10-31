@@ -22,9 +22,13 @@ const CartIcon = () => {
 			<BsCart3 style={{ color: "black" }} size={35} cursor="pointer">
 				{/* <span className="text-danger mt-2">0</span> */}
 			</BsCart3>
-			<span className="ms-1 mt-2 position-absolute top-3 translate-middle badge rounded-pill bg-primary">
-				{cartCount}
-			</span>
+			{cartCount > 0 ? (
+				<span className="ms-1 mt-2 position-absolute top-3 translate-middle badge rounded-pill bg-primary">
+					{cartCount}
+				</span>
+			) : (
+				""
+			)}
 		</div>
 	);
 };

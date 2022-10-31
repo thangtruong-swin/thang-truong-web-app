@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { UserContext } from "./Context/user.context-component";
 import Navbar from "./components/navigation/navbar-components";
 import Home from "./components/home/home.component";
-import NewArrivalComponent from "./components/New-Arrival/new-arrival-component";
+import NewArrivalComponent from "./components/new-arrival-products/new-arrival-component";
 import Sale from "./components/Sale/sale-component";
 import Shop from "./components/Shop/shop-component";
 import Categories from "./components/Categories/categories-component";
@@ -23,7 +23,7 @@ function App() {
 	return (
 		<Routes>
 			<Route path="/" element={<Navbar />}></Route>
-			<Route index element={<Shop />} />
+			<Route index element={<Home />} />
 
 			<Route path="/new-arrival" element={<NewArrivalComponent />}></Route>
 			<Route path="/sale" element={<Sale />}></Route>

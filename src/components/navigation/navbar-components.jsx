@@ -62,47 +62,26 @@ const Header = () => {
 				<div className="col collapse navbar-collapse " id="navbarScroll">
 					<ul className="navbar-nav me-auto  ms-2 ">
 						<li className="nav-item ">
-							<Link
-								className="nav-link navbar-brand text-dark fw-bold "
-								// style={{
-								// 	textDecoration: "none",
-								// 	color: "goldenrod",
-								// 	fontWeight: "bold",
-								// 	// fontSize: 18,
-								// }}
-								to="/"
-							>
+							<Link className="nav-link navbar-brand text-dark fw-bold " to="/">
 								Home
 							</Link>
 						</li>
 						<li className="nav-item">
 							<Link
 								className="nav-link navbar-brand text-dark fw-bold"
-								// style={{
-								// 	textDecoration: "none",
-								// 	color: "goldenrod",
-								// 	fontWeight: "bold",
-								// 	// fontSize: 20,
-								// }}
 								to="/new-arrival"
 							>
 								New Arrival
 							</Link>
 						</li>
-						<li className="nav-item">
+						{/* <li className="nav-item">
 							<Link
 								className="nav-link navbar-brand text-dark fw-bold "
-								// style={{
-								// 	textDecoration: "none",
-								// 	color: "goldenrod",
-								// 	fontWeight: "bold",
-								// 	// fontSize: 20,
-								// }}
 								to="/shop"
 							>
 								Shop
 							</Link>
-						</li>
+						</li> */}
 
 						<li className="nav-item dropdown">
 							<Link

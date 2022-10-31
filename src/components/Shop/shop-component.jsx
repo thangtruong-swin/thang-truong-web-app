@@ -3,6 +3,7 @@ import { useState, useEffect, Fragment, useContext } from "react";
 import { CategoriesContext } from "../../Context/categories.context";
 import Navbar from "../navigation/navbar-components";
 import ProductCard from "../product-card/product-card.component";
+import News from "../news/news-component";
 
 const Shop = () => {
 	const { categoriesMap } = useContext(CategoriesContext);
@@ -11,9 +12,9 @@ const Shop = () => {
 			<Navbar />
 			<div className="container-fluid mt-3">
 				<div className="d-flex justify-content-around">
-					<div className="col-2 d-none d-xxl-block border-end">
+					{/* <div className="col-2 d-none d-xxl-block border-end">
 						<div className="text-danger fs-5 fw-bold text-uppercase font-monospace">
-							<p>Hot products</p>
+							<p>News</p>
 						</div>
 						<div className="row mb-0 text-muted font-monospace fs-5 fw-bold text-uppercase">
 							<div className="mt-3">
@@ -26,7 +27,8 @@ const Shop = () => {
 								<p className="text-muted ">Comming soon . . .</p>
 							</div>
 						</div>
-					</div>
+					</div> */}
+					<News />
 					<div className="col-10">
 						<div className="text-center fs-1 fw-bold text-uppercase font-monospace">
 							<p>Recommended for you</p>

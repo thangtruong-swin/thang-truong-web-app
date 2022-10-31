@@ -1,13 +1,13 @@
-import React from "react";
 import { useState, useEffect, Fragment, useContext } from "react";
 import { CategoriesContext } from "../../Context/categories.context";
 import Navbar from "../navigation/navbar-components";
-import ProductCard from "../product-card/product-card.component";
 import News from "../news/news-component";
+import ProductCard from "../product-card/product-card.component";
 import Footer from "../footer/footer-component";
 
-const HomePage = () => {
+const NewArrivalComponent = () => {
 	const { categoriesMap } = useContext(CategoriesContext);
+
 	return (
 		<Fragment>
 			<Navbar />
@@ -16,21 +16,24 @@ const HomePage = () => {
 					<News />
 					<div className="col-10">
 						<div className="text-center fs-1 fw-bold text-uppercase font-monospace">
-							<p>Recommended for you</p>
+							<p>Latest products</p>
 						</div>
-
 						{Object.keys(categoriesMap).map((title) => (
 							<Fragment key={title}>
 								<p className="mt-5 mx-5 fw-bold fs-4 text-uppercase bg-light text-danger font-monospace">
 									Category - {title}
 								</p>
-
 								<div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-									{categoriesMap[title].map((product) => (
-										<div className="d-flex justify-content-evenly">
-											<ProductCard key={product.id} product={product} />
-										</div>
-									))}
+									{categoriesMap[title]
+										.filter((product) => product.newArrival === true)
+										.map((newArrivalproduct) => (
+											<div className="d-flex justify-content-evenly">
+												<ProductCard
+													key={newArrivalproduct.id}
+													product={newArrivalproduct}
+												/>
+											</div>
+										))}
 								</div>
 							</Fragment>
 						))}
@@ -41,4 +44,5 @@ const HomePage = () => {
 		</Fragment>
 	);
 };
-export default HomePage;
+
+export default NewArrivalComponent;
