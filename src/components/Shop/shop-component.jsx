@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect, Fragment, useContext } from "react";
-import { ProductsContext } from "../../Context/products.context";
+import { CategoriesContext } from "../../Context/categories.context";
 import Navbar from "../navigation/navbar-components";
 import ProductCard from "../product-card/product-card.component";
 
 const Shop = () => {
-	const { products } = useContext(ProductsContext);
+	const { categoriesMap } = useContext(CategoriesContext);
 	return (
 		<Fragment>
 			<Navbar />
@@ -13,7 +13,7 @@ const Shop = () => {
 				<div className="d-flex justify-content-around">
 					<div className="col-2 d-none d-xl-block">
 						<div className="text-center fs-3 fw-bold text-uppercase font-monospace">
-							<p>top sales</p>
+							<p>News</p>
 						</div>
 						<div className="row mb-0 text-muted font-monospace fs-5 fw-bold text-uppercase">
 							<div className="mt-3">
@@ -31,18 +31,26 @@ const Shop = () => {
 						<div className="text-center fs-3 fw-bold text-uppercase font-monospace">
 							<p>Recommended for you</p>
 						</div>
-						<div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-							{products.map((product) => (
-								<div className="d-flex justify-content-evenly">
-									<ProductCard key={product.id} product={product} />
+
+						{Object.keys(categoriesMap).map((title) => (
+							<Fragment key={title}>
+								<p className="mt-5 mx-5 fw-bold fs-4 text-uppercase bg-light text-danger font-monospace">
+									Category - {title}
+								</p>
+
+								<div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+									{categoriesMap[title].map((product) => (
+										<div className="d-flex justify-content-evenly">
+											<ProductCard key={product.id} product={product} />
+										</div>
+									))}
 								</div>
-							))}
-						</div>
+							</Fragment>
+						))}
 					</div>
 				</div>
 			</div>
 		</Fragment>
 	);
 };
-// d-flex-sm justify-content-center d-flex justify-content-end
 export default Shop;
