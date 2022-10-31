@@ -1,38 +1,29 @@
 import React from "react";
 import { useState, useEffect, Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
-import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
-import { updateProfile, onAuthStateChanged } from "firebase/auth";
+import CartIcon from "../cart-icon/cartIcon ";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { signOutUser, auth } from "../../utils/firebase/firebase.utils";
 import { UserContext } from "../../Context/user.context-component";
+import { CartContext } from "../../Context/cart.context";
+
 import { GrReactjs } from "react-icons/gr";
-import LoginAvatar from "../../assets/LoginAvatar.png";
 
 import "./navbar-component-style.css";
 
 const Header = () => {
 	const { currentUser, setCurrentUser } = useContext(UserContext);
+	const { isCartOpen } = useContext(CartContext);
 	// const [displayName, setdisplayName] = useState("");
 	const signOutHandler = async () => {
 		await signOutUser();
 		setCurrentUser(null);
-		// setdisplayName(null);
 	};
-
 	const user = auth.currentUser;
 	console.log("called");
-	// onAuthStateChanged(auth, (user) => {
-	// 	if (user) {
-	// 		setCurrentUser(user);
-	// 		// setdisplayName(user.displayName);
-	// 	} else {
-	// 		signOutHandler();
-	// 	}
-	// });
-
 	return (
 		<Fragment>
-			<div className="container-fluid bg-warning bg-gradient p-2 d-flex justify-content-between">
+			<div className="container-fluid bg-secondary bg-gradient p-3 d-flex justify-content-between ">
 				<i className="fa-solid fa-truck me-5 fst-italic">
 					<span className="ms-1 custom-font-family">
 						Free delivery over $100
@@ -42,19 +33,21 @@ const Header = () => {
 					<span className="ms-1 custom-font-family">Free return in 30days</span>
 				</i>
 			</div>
-			<div className="navbar navbar-expand-lg navbar-dark bg-success bg-gradient">
-				<div className="col">
+			<div className="navbar navbar-expand-lg navbar-dark bg-white bg-gradient border-bottom">
+				<div className="col ">
 					<div className="d-flex justify-content-between">
-						<Link className=" ms-3" to="/">
+						<Link className="ms-3" to="/">
 							<GrReactjs
-							// className="logo-icon fa-5x"
-							// style={{ color: "white" }}
-							// size={50}
+								className="mt-1"
+								style={{ color: "black" }}
+								size={35}
 							/>
 						</Link>
-						<ShoppingIcon className="mx-auto" />
+						<CartIcon />
+						{/* go to checkout page */}
+						{/* {isCartOpen && <CartDropdown />} */}
 						<button
-							className="navbar-toggler me-2"
+							className="navbar-toggler me-2 border border-dark bg-secondary"
 							type="button"
 							data-bs-toggle="collapse"
 							data-bs-target="#navbarScroll"
@@ -62,15 +55,15 @@ const Header = () => {
 							aria-expanded="false"
 							aria-label="Toggle navigation"
 						>
-							<span className="navbar-toggler-icon"></span>
+							<span className="navbar-toggler-icon text-dark fw-bold"></span>
 						</button>
 					</div>
 				</div>
-				<div className="col collapse navbar-collapse" id="navbarScroll">
-					<ul className="navbar-nav me-auto  ms-2">
+				<div className="col collapse navbar-collapse " id="navbarScroll">
+					<ul className="navbar-nav me-auto  ms-2 ">
 						<li className="nav-item ">
 							<Link
-								className="nav-link navbar-brand"
+								className="nav-link navbar-brand text-dark fw-bold "
 								// style={{
 								// 	textDecoration: "none",
 								// 	color: "goldenrod",
@@ -84,7 +77,7 @@ const Header = () => {
 						</li>
 						<li className="nav-item">
 							<Link
-								className="nav-link navbar-brand"
+								className="nav-link navbar-brand text-dark fw-bold"
 								// style={{
 								// 	textDecoration: "none",
 								// 	color: "goldenrod",
@@ -98,7 +91,7 @@ const Header = () => {
 						</li>
 						<li className="nav-item">
 							<Link
-								className="nav-link navbar-brand"
+								className="nav-link navbar-brand text-dark fw-bold "
 								// style={{
 								// 	textDecoration: "none",
 								// 	color: "goldenrod",
@@ -113,7 +106,7 @@ const Header = () => {
 
 						<li className="nav-item dropdown">
 							<Link
-								className="nav-link dropdown-toggle navbar-brand text-capitalize "
+								className="nav-link dropdown-toggle navbar-brand text-capitalize text-dark fw-bold"
 								id="navbarDropdown"
 								role="button"
 								data-bs-toggle="dropdown"
@@ -160,7 +153,7 @@ const Header = () => {
 							<span className="btn dropdown">
 								<a
 									href="#"
-									className="text-decoration-none dropdown-toggle navbar-brand"
+									className="text-decoration-none dropdown-toggle navbar-brand text-dark fw-bold"
 									data-bs-toggle="dropdown"
 									aria-expanded="false"
 								>
@@ -177,7 +170,9 @@ const Header = () => {
 											fontSize: 14,
 										}}
 									>
-										<span className="font-monospace">{user.displayName}</span>
+										<span className="font-monospace text-dark fw-bold">
+											{user.displayName}
+										</span>
 									</span>
 								</a>
 								<ul className="dropdown-menu text-dark ms-3 mt-2">
