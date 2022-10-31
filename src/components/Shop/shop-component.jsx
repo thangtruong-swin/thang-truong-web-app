@@ -12,8 +12,8 @@ const Shop = () => {
 			<div className="container-fluid mt-3">
 				<div className="d-flex justify-content-around">
 					<div className="col-2 d-none d-xxl-block border-end">
-						<div className="text-center fs-5 fw-bold text-uppercase font-monospace">
-							<p>Lastest Products</p>
+						<div className="text-danger fs-5 fw-bold text-uppercase font-monospace">
+							<p>Hot products</p>
 						</div>
 						<div className="row mb-0 text-muted font-monospace fs-5 fw-bold text-uppercase">
 							<div className="mt-3">
@@ -28,7 +28,7 @@ const Shop = () => {
 						</div>
 					</div>
 					<div className="col-10">
-						<div className="text-center fs-3 fw-bold text-uppercase font-monospace">
+						<div className="text-center fs-1 fw-bold text-uppercase font-monospace">
 							<p>Recommended for you</p>
 						</div>
 

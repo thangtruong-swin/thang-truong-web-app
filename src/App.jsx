@@ -23,7 +23,7 @@ function App() {
 	return (
 		<Routes>
 			<Route path="/" element={<Navbar />}></Route>
-			{/* <Route index element={<Home />} /> */}
+			<Route index element={<Shop />} />
 
 			<Route path="/new-arrival" element={<NewArrivalComponent />}></Route>
 			<Route path="/sale" element={<Sale />}></Route>

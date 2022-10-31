@@ -16,9 +16,9 @@ const Checkout = () => {
 		<Fragment>
 			<Navbar />
 			<div className="container">
-				<h2 className="text-center mt-5 text-danger text-uppercase font-monospace">
+				<h1 className="text-center mt-5 text-danger text-uppercase font-monospace">
 					review check-out page
-				</h2>
+				</h1>
 				<table class="table table-hover mt-5 table-bordered">
 					<thead className="fw-bold bg-secondary bg-gradient text-uppercase text-dark">
 						<tr>
