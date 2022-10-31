@@ -1,14 +1,14 @@
 import React from "react";
 import { useState, useEffect, Fragment, useContext } from "react";
 import { ProductsContext } from "../../Context/products.context";
-import Header from "../navigation/navbar-components";
+import Navbar from "../navigation/navbar-components";
 import ProductCard from "../product-card/product-card.component";
 
 const Shop = () => {
 	const { products } = useContext(ProductsContext);
 	return (
 		<Fragment>
-			<Header />
+			<Navbar />
 			<div className="container-fluid mt-3">
 				<div className="d-flex justify-content-around">
 					<div className="col-2 d-none d-xl-block">

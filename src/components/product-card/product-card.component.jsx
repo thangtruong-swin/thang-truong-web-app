@@ -1,10 +1,29 @@
+import { useContext } from "react";
+
+import { CartContext } from "../../Context/cart.context";
 const ProductCard = ({ product }) => {
 	const { name, price, imageUrl } = product;
+	const { addItemToCart } = useContext(CartContext);
+	const addProductToCart = () => addItemToCart(product);
 	return (
 		<div className="mt-3">
 			<p className="mb-0 text-muted font-monospace fs-5 fw-bold text-uppercase">
 				{name}
 			</p>
+			{product.newArrival ? (
+				<h5 className="text-center">
+					<span
+						className="badge rounded-pill text-bg-danger mt-2"
+						style={{
+							position: "absolute",
+						}}
+					>
+						New Arrival
+					</span>
+				</h5>
+			) : (
+				""
+			)}
 			<img
 				src={imageUrl}
 				alt={`${name}`}
@@ -20,7 +39,9 @@ const ProductCard = ({ product }) => {
 
 				<span className="text-muted">${price}</span>
 			</div>
-			<button className="btn btn-dark btn-sm">Add to card</button>
+			<button className="btn btn-dark btn-sm" onClick={addProductToCart}>
+				Add to card
+			</button>
 		</div>
 	);
 };

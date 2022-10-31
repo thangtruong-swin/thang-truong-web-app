@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, Fragment, useContext } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import CartIcon from "../cart-icon/cartIcon ";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { signOutUser, auth } from "../../utils/firebase/firebase.utils";
@@ -14,13 +14,13 @@ import "./navbar-component-style.css";
 const Header = () => {
 	const { currentUser, setCurrentUser } = useContext(UserContext);
 	const { isCartOpen } = useContext(CartContext);
-	// const [displayName, setdisplayName] = useState("");
 	const signOutHandler = async () => {
 		await signOutUser();
 		setCurrentUser(null);
 	};
 	const user = auth.currentUser;
 	console.log("called");
+
 	return (
 		<Fragment>
 			<div className="container-fluid bg-secondary bg-gradient p-3 d-flex justify-content-between ">
@@ -205,7 +205,7 @@ const Header = () => {
 							</span>
 						) : (
 							<Link
-								className="btn btn-outline-dark bg-gradient ms-2 me-5 text-white"
+								className="btn btn-outline-dark bg-gradient ms-2 me-5 text-dark fw-bold"
 								to="/login"
 							>
 								Login

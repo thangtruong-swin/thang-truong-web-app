@@ -8,10 +8,9 @@ import NewArrivalComponent from "./components/New-Arrival/new-arrival-component"
 import Sale from "./components/Sale/sale-component";
 import Shop from "./components/Shop/shop-component";
 import Categories from "./components/Categories/categories-component";
-import Contactus from "./components/ContactUs/contactus-component";
 import SignIn from "./components/Authentication/Sign-In/sign-In.conponent";
 import SignUp from "./components/Authentication/SignUp/sign-up-component";
-
+import Checkout from "./components/checkout/checkout.component";
 import Dashboard from "./components/Dashboard/dashboard-component";
 import { getAuth } from "firebase/auth";
 import "./App.css";
@@ -39,6 +38,7 @@ function App() {
 				element={user ? <Navigate to="/" replace /> : <SignUp />}
 			></Route>
 			<Route path="/dashboard" element={<Dashboard />}></Route>
+			<Route path="/checkout" element={<Checkout />} />
 		</Routes>
 	);
 }
