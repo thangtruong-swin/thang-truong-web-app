@@ -28,8 +28,8 @@ const ProductCard = ({ product }) => {
 				alt={`${name}`}
 				className="rounded"
 				style={{
-					width: "250px",
-					height: "300px",
+					width: "240px",
+					height: "250px",
 					cursor: "pointer",
 				}}
 			/>

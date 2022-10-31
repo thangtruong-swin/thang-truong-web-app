@@ -11,9 +11,9 @@ const Shop = () => {
 			<Navbar />
 			<div className="container-fluid mt-3">
 				<div className="d-flex justify-content-around">
-					<div className="col-2 d-none d-xl-block">
-						<div className="text-center fs-3 fw-bold text-uppercase font-monospace">
-							<p>News</p>
+					<div className="col-2 d-none d-xxl-block border-end">
+						<div className="text-center fs-5 fw-bold text-uppercase font-monospace">
+							<p>Lastest Products</p>
 						</div>
 						<div className="row mb-0 text-muted font-monospace fs-5 fw-bold text-uppercase">
 							<div className="mt-3">
