@@ -1,7 +1,7 @@
 import { Fragment, useContext } from "react";
 import { useEffect, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
-import Header from "../../Header/header-components";
+import Header from "../../navigation/navbar-components";
 import { UserContext } from "../../../Context/user.context-component";
 import LoginAvatar from "../../../assets/LoginAvatar.png";
 import {

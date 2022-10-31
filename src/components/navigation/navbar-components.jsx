@@ -8,7 +8,7 @@ import { UserContext } from "../../Context/user.context-component";
 import { GrReactjs } from "react-icons/gr";
 import LoginAvatar from "../../assets/LoginAvatar.png";
 
-import "./header-component-style.css";
+import "./navbar-component-style.css";
 
 const Header = () => {
 	const { currentUser, setCurrentUser } = useContext(UserContext);

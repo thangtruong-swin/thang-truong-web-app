@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import Header from "../Header/header-components";
+import Header from "../navigation/navbar-components";
 
 const Sale = () => {
 	return (

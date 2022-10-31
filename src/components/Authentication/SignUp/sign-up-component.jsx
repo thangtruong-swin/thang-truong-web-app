@@ -1,4 +1,4 @@
-import Header from "../../Header/header-components";
+import Header from "../../navigation/navbar-components";
 import { Fragment, useState, useContext, useEffect } from "react";
 import { UserContext } from "../../../Context/user.context-component";
 import { Outlet, Link } from "react-router-dom";

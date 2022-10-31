@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "./Context/user.context-component";
-import Header from "./components/Header/header-components";
+import Navbar from "./components/navigation/navbar-components";
 import Home from "./components/home/home.component";
 import NewArrivalComponent from "./components/New-Arrival/new-arrival-component";
 import Sale from "./components/Sale/sale-component";
@@ -23,7 +23,7 @@ function App() {
 
 	return (
 		<Routes>
-			<Route path="/" element={<Header />}></Route>
+			<Route path="/" element={<Navbar />}></Route>
 			{/* <Route index element={<Home />} /> */}
 
 			<Route path="/new-arrival" element={<NewArrivalComponent />}></Route>
