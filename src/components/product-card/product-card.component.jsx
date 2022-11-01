@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
 				alt={`${name}`}
 				className="rounded"
 				style={{
-					width: "240px",
+					width: "250px",
 					height: "250px",
 					cursor: "pointer",
 				}}
@@ -41,7 +41,10 @@ const ProductCard = ({ product }) => {
 				<span className="text-muted">${price}</span>
 			</div>
 
-			<button className="btn btn-dark btn-sm" onClick={addProductToCart}>
+			<button
+				className="btn btn-dark btn-sm fw-bold font-monospace"
+				onClick={addProductToCart}
+			>
 				Add to card
 			</button>
 		</div>

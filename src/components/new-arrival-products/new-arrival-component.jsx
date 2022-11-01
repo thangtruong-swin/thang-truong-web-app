@@ -11,16 +11,16 @@ const NewArrivalComponent = () => {
 	return (
 		<Fragment>
 			<Navbar />
-			<div className="container-fluid mt-3">
-				<div className="d-flex justify-content-around">
+			<div className="container mt-3">
+				<div className="row row-cols-2">
 					<News />
-					<div className="col-10">
+					<div className="col-xxl-10 col-12">
 						<div className="text-center fs-1 fw-bold text-uppercase font-monospace">
 							<p>Latest products</p>
 						</div>
 						{Object.keys(categoriesMap).map((title) => (
 							<Fragment key={title}>
-								<p className="mt-5 mx-5 fw-bold fs-4 text-uppercase bg-light text-danger font-monospace">
+								<p className="mt-5 fw-bold fs-4 text-uppercase bg-light text-danger font-monospace">
 									Category - {title}
 								</p>
 								<div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
