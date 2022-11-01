@@ -8,6 +8,7 @@ import Footer from "../footer/footer-component";
 
 const HomePage = () => {
 	const { categoriesMap } = useContext(CategoriesContext);
+
 	return (
 		<Fragment>
 			<Navbar />
@@ -16,7 +17,7 @@ const HomePage = () => {
 					{/* <div className="d-flex justify-content-around"> */}
 					<News />
 					<div className="col-xxl-10 col-12">
-						<div className="text-center fs-1 fw-bold text-uppercase font-monospace">
+						<div className="text-center fs-1 fw-bold text-uppercase font-monospace ">
 							<p>Recommended for you</p>
 						</div>
 
@@ -28,9 +29,11 @@ const HomePage = () => {
 
 								<div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 ">
 									{categoriesMap[title].map((product) => (
-										<div className="d-flex justify-content-evenly">
-											<ProductCard key={product.id} product={product} />
-										</div>
+										<Fragment key={product.id}>
+											<div className="d-flex justify-content-evenly">
+												<ProductCard product={product} />
+											</div>
+										</Fragment>
 									))}
 								</div>
 							</Fragment>

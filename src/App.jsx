@@ -7,7 +7,7 @@ import Home from "./components/home/home.component";
 import NewArrivalComponent from "./components/new-arrival-products/new-arrival-component";
 import Sale from "./components/Sale/sale-component";
 import Shop from "./components/Shop/shop-component";
-import Categories from "./components/Categories/categories-component";
+import Categories from "./components/Categories/categories-review.component";
 import SignIn from "./components/Authentication/Sign-In/sign-In.conponent";
 import SignUp from "./components/Authentication/SignUp/sign-up-component";
 import Checkout from "./components/checkout/checkout.component";
@@ -25,10 +25,10 @@ function App() {
 			<Route path="/" element={<Navbar />}></Route>
 			<Route index element={<Home />} />
 
-			<Route path="/new-arrival" element={<NewArrivalComponent />}></Route>
-			<Route path="/sale" element={<Sale />}></Route>
-			<Route path="/shop" element={<Shop />}></Route>
-			<Route path="/categories" element={<Categories />}></Route>
+			<Route path="new-arrival" element={<NewArrivalComponent />}></Route>
+			{/* <Route path="/sale" element={<Sale />}></Route> */}
+			{/* <Route path="/shop" element={<Shop />}></Route> */}
+			<Route path="categories/:title" element={<Categories />}></Route>
 			<Route
 				path="/login"
 				element={user ? <Navigate to="/" replace /> : <SignIn />}
@@ -37,8 +37,8 @@ function App() {
 				path="/sign-up"
 				element={user ? <Navigate to="/" replace /> : <SignUp />}
 			></Route>
-			<Route path="/dashboard" element={<Dashboard />}></Route>
-			<Route path="/checkout" element={<Checkout />} />
+			<Route path="dashboard" element={<Dashboard />}></Route>
+			<Route path="checkout" element={<Checkout />} />
 		</Routes>
 	);
 }

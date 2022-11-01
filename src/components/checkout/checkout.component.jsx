@@ -54,9 +54,7 @@ const Checkout = () => {
 					</p>
 				)}
 			</div>
-			<div className="fixed-bottom">
-				<Footer />
-			</div>
+			{/* <Footer /> */}
 		</Fragment>
 	);
 };

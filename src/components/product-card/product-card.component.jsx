@@ -42,7 +42,7 @@ const ProductCard = ({ product }) => {
 			</div>
 
 			<button
-				className="btn btn-dark btn-sm fw-bold font-monospace"
+				className="btn btn-dark btn-sm fw-bold font-monospace my-1"
 				onClick={addProductToCart}
 			>
 				Add to card

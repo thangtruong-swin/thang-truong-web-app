@@ -2,10 +2,11 @@ import React from "react";
 import { useState, useEffect, Fragment, useContext } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import CartIcon from "../cart-icon/cartIcon ";
-import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { signOutUser, auth } from "../../utils/firebase/firebase.utils";
 import { UserContext } from "../../Context/user.context-component";
 import { CartContext } from "../../Context/cart.context";
+import Categories from "../Categories/categories-review.component";
+import { CategoriesContext } from "../../Context/categories.context";
 
 import { GrReactjs } from "react-icons/gr";
 
@@ -13,13 +14,15 @@ import "./navbar-component-style.css";
 
 const Header = () => {
 	const { currentUser, setCurrentUser } = useContext(UserContext);
-	const { isCartOpen } = useContext(CartContext);
+	const { categoriesMap } = useContext(CategoriesContext);
+
 	const signOutHandler = async () => {
 		await signOutUser();
 		setCurrentUser(null);
 	};
+
 	const user = auth.currentUser;
-	console.log("called");
+	// console.log("called");
 
 	return (
 		<Fragment>
@@ -103,27 +106,19 @@ const Header = () => {
 								className="dropdown-menu mt-3"
 								aria-labelledby="navbarDropdown"
 							>
-								<li>
-									<Link className="dropdown-item font-monospace" to="/sale">
-										Sneakers
-									</Link>
-								</li>
-								<hr className="dropdown-divider" />
-
-								<li>
-									<Link className="dropdown-item font-monospace" to="/sale">
-										Clothes
-									</Link>
-								</li>
-
-								<li>
-									<hr className="dropdown-divider" />
-								</li>
-								<li>
-									<Link className="dropdown-item font-monospace" to="/sale">
-										Hats
-									</Link>
-								</li>
+								{Object.keys(categoriesMap).map((title) => (
+									<Fragment key={title}>
+										<li>
+											<Link
+												className="dropdown-item font-monospace text-capitalize"
+												to={`/categories/${title}`}
+											>
+												{title}
+											</Link>
+										</li>
+										<hr className="dropdown-divider" />
+									</Fragment>
+								))}
 							</ul>
 						</li>
 					</ul>

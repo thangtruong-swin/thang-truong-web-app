@@ -5,7 +5,7 @@ import { BsLinkedin } from "react-icons/bs";
 const Footer = () => {
 	return (
 		<Fragment>
-			<footer class="mt-5 container-fluid bg-light text-muted">
+			<footer className="mt-5 container-fluid bg-light text-muted">
 				<div className="text-primary text-center pt-2">
 					<span className="mx-3">
 						<a href="https://www.facebook.com/profile.php?id=100051753410222">

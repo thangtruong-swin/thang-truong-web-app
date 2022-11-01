@@ -27,12 +27,11 @@ const NewArrivalComponent = () => {
 									{categoriesMap[title]
 										.filter((product) => product.newArrival === true)
 										.map((newArrivalproduct) => (
-											<div className="d-flex justify-content-evenly">
-												<ProductCard
-													key={newArrivalproduct.id}
-													product={newArrivalproduct}
-												/>
-											</div>
+											<Fragment key={newArrivalproduct.id}>
+												<div className="d-flex justify-content-evenly">
+													<ProductCard product={newArrivalproduct} />
+												</div>
+											</Fragment>
 										))}
 								</div>
 							</Fragment>
